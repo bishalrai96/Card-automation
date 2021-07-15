@@ -1,0 +1,16 @@
+name: 'Project card automation'
+description: 'Automating project card with label and card events''
+author: 'Bishal Rai'
+inputs:
+  repo-token:
+    description: 'The GH_TOKEN secret can be passed in using {{ secrets.GH_TOKEN }}'
+    required: true
+  project:
+    description: 'The name of the GitHub Project'
+    required: false
+  column:
+    description: 'The name of the column to move the issue or pull request to'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
