@@ -5,7 +5,7 @@ jobs:
   Move_Labeled_Issue_On_Project_Board:
     runs-on: ubuntu-latest
     steps:
-    - uses: action/Card-automation@master
+    - uses: actions/Card-automation@master
       with:
         action-token: "${{ secrets.GITHUB_TOKEN }}"
         project: "https://github.com/orgs/github/projects/1"
