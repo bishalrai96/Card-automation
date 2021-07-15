@@ -9,6 +9,7 @@ jobs:
     steps:
       # To use this repository's private action,
       # you must check out the repository
+      - uses: crazy-max/ghaction-dump-context@v1
       - name: Checkout
         uses: actions/checkout@master
       - name: Hello world action step
