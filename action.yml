@@ -1,16 +1,13 @@
-name: 'Project card automation'
-description: 'Automating project card with label and card events''
-author: 'Bishal Rai'
+name: 'Hello World'
+description: 'Greet someone and record the time'
 inputs:
-  repo-token:
-    description: 'The GH_TOKEN secret can be passed in using {{ secrets.GH_TOKEN }}'
+  who-to-greet:  # id of input
+    description: 'Who to greet'
     required: true
-  project:
-    description: 'The name of the GitHub Project'
-    required: false
-  column:
-    description: 'The name of the column to move the issue or pull request to'
-    required: true
+    default: 'World'
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
 runs:
   using: 'node12'
-  main: 'src/index.js'
+  main: 'index.js
