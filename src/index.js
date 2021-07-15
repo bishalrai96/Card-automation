@@ -7,7 +7,7 @@ try {
     const column = core.getInput('column');
 
 	const octokit = new github.GitHub(token);
-	core.debug(github.context)
+    console.log(github.context)
 
 } catch (error) {
     core.setFailed(error.message)
