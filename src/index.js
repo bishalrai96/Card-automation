@@ -6,7 +6,6 @@ try {
     const project = core.getInput('project');
     const column = core.getInput('column');
 
-	const octokit = new github.GitHub(token);
     console.log("the github context ", github.context)
     // with is not getting executed in
 } catch (error) {
