@@ -1,6 +1,5 @@
 on: 
-  issues:
-    - labeled
+  issues: [labeled]
 
 jobs:
   hello_world_job:
