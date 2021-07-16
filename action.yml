@@ -1,5 +1,5 @@
 name: 'Project card automation'
-description: 'Automating project card with label and card events''
+description: 'Automating project card with label and card events'
 author: 'Bishal Rai'
 inputs:
   repo-token:
