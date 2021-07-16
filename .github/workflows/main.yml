@@ -16,7 +16,6 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          project: "https://github.com/orgs/github/projects/1"
+          column: "On Deck"
