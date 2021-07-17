@@ -12,6 +12,7 @@ try {
     const { eventName, payload } =  github.context;
     console.log("eventName", eventName);
     console.log("payload", payload);
+    console.log(typeof, github.context);
 
     // with is not getting executed in
 } catch (error) {
