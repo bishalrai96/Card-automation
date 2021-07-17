@@ -9,7 +9,7 @@ try {
     // console.log("the github context ", github.context)
 
     // get url
-    const { eventName, payload } = githubContext;
+    const { eventName, payload } =  github.context;
     console.log("eventName", eventName);
     console.log("payload", payload);
 
