@@ -5,8 +5,7 @@ try {
     const token = core.getInput('repo-token');
     const project = core.getInput('project');
     const column = core.getInput('column');
-
-    console.log("the github context ", github.context)
+    const octokit = github.getOctokit(token);
     // with is not getting executed in
 } catch (error) {
     console.log("failed but why ", error.message)
