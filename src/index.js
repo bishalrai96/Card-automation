@@ -51,9 +51,10 @@ try {
           }
         }`;
 
-        const list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently).map(project => {
+        var list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently);
+        list_of_projects = list_of_projects.map(project => {
             project.name;
-        })
+        });
         console.log("bahahaha")
         console.log("list of projects", list_of_projects)
     } else {
