@@ -22,9 +22,9 @@ try {
 
   
 
-    console.log("eventName", eventName);
-    console.log("payload", payload);
-    console.log(typeof github.context);
+    //console.log("eventName", eventName);
+    //console.log("payload", payload);
+    //console.log(typeof github.context);
 
     if (eventName !== "issues") {
         throw new Error("Only issues event accepting ath the moment");
@@ -34,7 +34,7 @@ try {
     url = payload.issue.html_url;
     nodeId = payload.issue.node_id;
 
-    
+    console.log("BEFORE LABEL", labelIsPresent);
     if (labelIsPresent) {
         console.log("before");
         get_which_projects_it_is_in_currently = `query { 
