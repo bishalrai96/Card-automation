@@ -60,6 +60,7 @@ try {
                 node.project.name;
                 console.log("inside", node);
                 console.log("inside", node.project);
+                console.log("inside", node.project.name);
                 console.log("\n");
             });
             console.log("list of projects", list_of_projects)
