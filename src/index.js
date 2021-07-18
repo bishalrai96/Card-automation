@@ -57,7 +57,7 @@ try {
             var test = resource.projectCards.nodes;
             var projects = []
             for (const val of test) {
-                projects.push(val);
+                projects.push(val.project.name);
             }
             console.log("list of projects", projects)
             
