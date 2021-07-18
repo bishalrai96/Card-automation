@@ -8,12 +8,19 @@ try {
     const octokit = github.getOctokit(token);
     // console.log("the github context ", github.context)
 
-    // get url
-    const { eventName, payload } = githubContext;
-    console.log("eventName", eventName);
-    console.log("payload", payload);
+    // get name of event and payload
+    const { eventName, payload } = github.context;
 
-    // with is not getting executed in
+    if (eventName !== "issues") {
+        throw new Error("Only issues event accepting ath the moment");
+    } 
+
+    // get required information for graphql query
+    url = payload.issue.html_url;
+    nodeId = payload.issue.node_id;
+
+
+     
 } catch (error) {
     console.log("failed but why ", error.message)
     core.setFailed(error.message)
