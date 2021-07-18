@@ -11,7 +11,7 @@ try {
     // get url
     const { eventName, payload } = github.context;
 
-    var labelIsPresent = false;
+    var labelIsPresent = true;
     
 
     payload.issue.labels.forEach(item => {
