@@ -52,7 +52,7 @@ try {
         }`;
 
         const {resource} = octokit.graphql(get_which_projects_it_is_in_currently);
-        console.log("list of projects", resource);
+        console.log("list of projects", resource.projectCards.nodes);
         /*
         list_of_projects = list_of_projects.map(project => {
             project.name;
