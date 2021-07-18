@@ -55,13 +55,13 @@ try {
 
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently);
             console.log("list of projects", resource.projectCards.nodes);
-            /*
-            list_of_projects = list_of_projects.map(project => {
+            
+            var list_of_projects = resource.project.map(project => {
                 project.name;
             });
             console.log("bahahaha")
             console.log("list of projects", list_of_projects)
-            */
+            
         } else {
             return "Ignoring because provided label does not match"
         }
