@@ -36,6 +36,7 @@ try {
 
     
     if (labelIsPresent) {
+        console.log("before");
         get_which_projects_it_is_in_currently = `query { 
           resource(url:"${url}") {
   	        ... on Issue {
@@ -50,7 +51,7 @@ try {
           }
         }`;
 
-        list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently).map(project => {
+        const list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently).map(project => {
             project.name;
         })
         console.log("bahahaha")
