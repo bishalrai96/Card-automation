@@ -8,11 +8,19 @@ try {
     const label = core.getInput('label');
     const octokit = github.getOctokit(token);
     // console.log("the github context ", github.context)
-
+    octokit.projects.moveCard
     // get url
     const { eventName, payload } = github.context;
 
-    console.log("Labels!!", payload.issue.labels);
+    labelIsPresent = false;
+
+    payload.issue.labels.ForEach(item => {
+        if (item.name === label) {
+            labelIsPresent = true;
+        }
+    })
+
+  
 
     console.log("eventName", eventName);
     console.log("payload", payload);
@@ -27,20 +35,30 @@ try {
     nodeId = payload.issue.node_id;
 
     
-
-    get_which_projects_it_is_in_currently = `query { 
-  resource(url:"${url}") {
-  	... on Issue {
-      projectCards {
-      	nodes {
-          project {
-            name
+    if (labelIsPresent) {
+        get_which_projects_it_is_in_currently = `query { 
+          resource(url:"${url}") {
+  	        ... on Issue {
+              projectCards {
+      	        nodes {
+                  project {
+                    name
+                  }
+                }
+              }
+            }
           }
-        }
-      }
+        }`;
+
+        list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently).map(project => {
+            project.name;
+        })
+        console.log("list of projects", list_of_projects)
+    } else {
+        return "Ignoring because provided label does not match"
     }
-  }
-}`;
+
+
 
 
 
