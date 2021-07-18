@@ -57,7 +57,7 @@ try {
             console.log("test", resource.projectCards.nodes);
             var test = resource.projectCards.nodes;
             const list_of_projects = test.map(node => {
-                node.project.name;
+                String(node.project.name);
                 console.log("inside", node);
                 console.log("inside", node.project);
                 console.log("inside", node.project.name);
