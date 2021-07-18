@@ -34,7 +34,7 @@ try {
     url = payload.issue.html_url;
     nodeId = payload.issue.node_id;
 
-    console.log("BEFORE LABEL", labelIsPresent);
+    
     if (labelIsPresent) {
         console.log("before");
         get_which_projects_it_is_in_currently = `query { 
@@ -50,6 +50,7 @@ try {
             }
           }
         }`;
+        console.log("query", get_which_projects_it_is_in_currently);
 
         const {resource} = octokit.graphql(get_which_projects_it_is_in_currently);
         console.log("list of projects", resource.projectCards.nodes);
