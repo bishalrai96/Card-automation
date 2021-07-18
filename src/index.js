@@ -8,7 +8,6 @@ try {
     const label = core.getInput('label');
     const octokit = github.getOctokit(token);
     // console.log("the github context ", github.context)
-    octokit.projects.moveCard
     // get url
     const { eventName, payload } = github.context;
 
