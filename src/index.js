@@ -8,8 +8,11 @@ try {
     const octokit = github.getOctokit(token);
     // console.log("the github context ", github.context)
 
-    // get name of event and payload
-    const { eventName, payload } = github.context;
+    // get url
+    const { eventName, payload } =  github.context;
+    console.log("eventName", eventName);
+    console.log("payload", payload);
+    console.log(typeof github.context);
 
     if (eventName !== "issues") {
         throw new Error("Only issues event accepting ath the moment");
