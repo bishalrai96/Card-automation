@@ -51,7 +51,7 @@ try {
           }
         }`;
 
-        var list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently);
+        var list_of_projects = octokit.graphql(get_which_projects_it_is_in_currently).resource.projectCards.nodes;
         list_of_projects = list_of_projects.map(project => {
             project.name;
         });
