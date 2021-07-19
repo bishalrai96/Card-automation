@@ -11,6 +11,10 @@ inputs:
   label:
     description: 'The label that triggers the action'
     required: true
+  remove-label:
+    description: 'Label that needs to be removed'
+    required: false
+
 runs:
   using: 'node12'
   main: 'src/index.js'

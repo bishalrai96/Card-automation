@@ -24,6 +24,7 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "in progress"
           column: "In Progress"
+          remove-label: "test"
        
       - name: Move to Unique
         uses: ./
@@ -31,5 +32,6 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "unique"
           column: "Unique"
+          remove-label: "ready, in progress"
        
        

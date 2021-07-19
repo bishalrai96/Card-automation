@@ -3,14 +3,16 @@ const github = require('@actions/github');
 
 try {
     async function run() {
+        var removeLabels = ""
         const token = core.getInput('repo-token');
         const columnName = core.getInput('column');
         const label = core.getInput('label');
         const octokit = github.getOctokit(token);
         const { eventName, payload } = github.context;
+        removeLabels = core.getInput('remove-label');
 
         var labelIsPresent = false;
-
+        console.log(removeLabels);
         if (payload.label.name == label) {
             labelIsPresent = true;
         }
