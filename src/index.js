@@ -64,7 +64,9 @@ try {
             for (const val of test) {
                 projects.push(val.project.name);
             }
-/*
+            
+            columnsId = {}
+            
             for (const val of test) {
                 columnsID[val.column.id] = val.id;
             }
@@ -87,7 +89,7 @@ try {
                   }
                 }`
             }
-            */
+            
             // now push the card based on label
 
         } else {
