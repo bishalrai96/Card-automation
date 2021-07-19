@@ -92,21 +92,10 @@ try {
             var Queries = []
 
             Object.keys(columnsID).forEach(function (key) {
-                mutate_query = `mutation {
-                  moveProjectCard(input: {
-                    cardId: "${key}"
-                    columnId: "${columnsID[key]}"
-                    })
-                    {
-    
-                  }
-                }`
-                Queries.push(mutate_query);
+                moveCard(octokit, columnsID[key], key);
             });
-            Queries.join('\n');
-            console.log("Mutation", Queries);
             // now push the card based on label
-
+            
         } else {
             return "Ignoring because provided label does not match"
         }
@@ -116,4 +105,11 @@ try {
 } catch (error) {
     console.log("failed but why ", error.message)
     core.setFailed(error.message)
+}
+
+async function moveCard(octokit, cardID, columnID) {
+    await octokit.projects.moveCard({
+        card_id: cardID,
+        column_id: columnID
+    })
 }
