@@ -5,7 +5,7 @@ try {
     async function run() {
         const token = core.getInput('repo-token');
         const project = core.getInput('project');
-        const columnName = "Second";//core.getInput('column');
+        const columnName = "Ready";//core.getInput('column');
         const label = core.getInput('label');
         const octokit = github.getOctokit(token);
         // console.log("the github context ", github.context)
