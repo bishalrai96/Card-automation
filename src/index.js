@@ -75,12 +75,7 @@ try {
             
             for (const val of test) {
                 columns = val.project.columns.nodes;
-          
-                //var columns = test.project.columns;
-                //console.log("test.project.columns", test.project.columns);
-                
                 for (const col of columns) {
-                    console.log(col.name);
                     if (columnName === col.name) {
                         columnsID[val.id] = col.name;
                     }
@@ -94,6 +89,7 @@ try {
 
             console.log("list of projects", projects)
             Queries = []
+            /*
             for (const val of columnsID) {
                 mutate_query = `mutation {
                   moveProjectCard(input: {
@@ -105,7 +101,7 @@ try {
                   }
                 }`
             }
-            
+            */
             // now push the card based on label
 
         } else {
