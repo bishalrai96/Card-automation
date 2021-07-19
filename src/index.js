@@ -83,17 +83,25 @@ try {
                 }
                 
             }
-            
-
+           
             console.log("test", columnsID);
-            
-
             console.log("list of projects", projects)
             var Queries = []
 
-            Object.keys(columnsID).forEach(async function (key) {
-                await moveCard(octokit, columnsID[key], key);
+            Object.keys(columnsID).forEach(function (key) {
+                mutate_query = `mutation {
+                  moveProjectCard(input: {
+                    cardId: "${key}"
+                    columnId: "${columnsID[key]}"
+                    })
+                    {
+    
+                  }
+                }`
+                Queries.push(mutate_query);
             });
+            console.log("Mutation", Queries);
+
             // now push the card based on label
             
         } else {
