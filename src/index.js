@@ -74,8 +74,9 @@ try {
             var columnsID = {}
             
             for (const val of test) {
-                var columns = test.project.columns;
-                console.log(columns);
+                console.log("test.project", test.project)
+                //var columns = test.project.columns;
+                console.log("test.project.columns", test.project.columns);
                 /*
                 for (const col of columns) {
                     if (columnName === col.name) {
