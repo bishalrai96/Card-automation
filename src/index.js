@@ -58,7 +58,7 @@ try {
                 columns = projectCard.project.columns.nodes;
                 for (const col of columns) {
                     if (columnName === col.name) {
-                        columnsID[val.id] = col.id;
+                        columnsID[projectCard.id] = col.id;
                     }
                 }
                 
