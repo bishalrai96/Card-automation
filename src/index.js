@@ -10,12 +10,17 @@ try {
         const { eventName, payload } = github.context;
 
         var labelIsPresent = true;
-        console.log(payload);
+
+        if (payload.issue.label.name == label) {
+            labelIsPresent = true;
+        }
+        /*
         payload.issue.labels.forEach(item => {
             if (item.name === label) {
                 labelIsPresent = true;
             }
         })
+        */
 
         if (eventName !== "issues") {
             throw new Error("Only issues event accepting at the moment");
