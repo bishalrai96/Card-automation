@@ -44,26 +44,17 @@ try {
                   projectCards {
                     nodes {
                       project {
-                        id,
                         name
                       }
-                      column {
-                        id,
-                        name
                     }
                   }
                 }
               }
             }`;
-
-            
-
-            // get all the columns from the issue's project
             console.log("query", get_which_projects_it_is_in_currently);
 
-            columnsId = {}
-
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
+            
             var test = resource.projectCards.nodes;
             var projects = []
             for (const val of test) {
