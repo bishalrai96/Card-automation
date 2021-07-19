@@ -43,8 +43,12 @@ try {
                 ... on Issue {
                   projectCards {
                     nodes {
+                      id
                       project {
                         name
+                      }
+                      column {
+                        id
                       }
                     }
                   }
