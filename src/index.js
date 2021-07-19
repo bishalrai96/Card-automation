@@ -77,7 +77,7 @@ try {
                 columns = val.project.columns.nodes;
                 for (const col of columns) {
                     if (columnName === col.name) {
-                        columnsID[val.id] = col.name;
+                        columnsID[val.id] = col.id;
                     }
                 }
                 
@@ -88,20 +88,22 @@ try {
             
 
             console.log("list of projects", projects)
-            Queries = []
-            /*
-            for (const val of columnsID) {
+            var Queries = []
+
+            Object.keys(columnsID).forEach(function (key) {
                 mutate_query = `mutation {
                   moveProjectCard(input: {
-                    cardId: 
-                    
+                    cardId: "${key}"
+                    columnId: "${columnsID[key]}"
                     })
                     {
     
                   }
                 }`
-            }
-            */
+                Queries.push(mutate_query);
+            });
+            Queries.join('\n');
+            console.log("Mutation", Queries);
             // now push the card based on label
 
         } else {
