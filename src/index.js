@@ -91,7 +91,7 @@ try {
             console.log("list of projects", projects)
             var Queries = []
 
-            Object.keys(columnsID).forEach(function (key) {
+            Object.keys(columnsID).forEach(async function (key) {
                 await moveCard(octokit, columnsID[key], key);
             });
             // now push the card based on label
