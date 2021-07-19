@@ -75,7 +75,7 @@ try {
             }
 
             console.log("test", columnsID);
-
+            /*
 
             console.log("list of projects", projects)
             Queries = []
@@ -92,7 +92,7 @@ try {
                   }
                 }`
             }
-
+            */
             // now push the card based on label
 
         } else {
