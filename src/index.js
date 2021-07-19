@@ -10,7 +10,7 @@ try {
         const { eventName, payload } = github.context;
 
         var labelIsPresent = true;
-
+        console.log(payload);
         payload.issue.labels.forEach(item => {
             if (item.name === label) {
                 labelIsPresent = true;
