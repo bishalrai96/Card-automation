@@ -79,7 +79,7 @@ try {
 
             console.log("list of projects", projects)
             Queries = []
-            for (const val of columns) {
+            for (const val of columnsId) {
                 mutate_query = `mutation {
                   moveProjectCard(input: {
                     cardId: 
