@@ -65,6 +65,7 @@ try {
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
             
             var test = resource.projectCards.nodes;
+            console.log("all", test);
             var projects = []
             for (const val of test) {
                 projects.push(val.project.name);
