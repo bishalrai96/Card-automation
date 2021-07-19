@@ -11,7 +11,7 @@ try {
 
         var labelIsPresent = true;
 
-        if (payload.issue.label.name == label) {
+        if (payload.label.name == label) {
             labelIsPresent = true;
         }
         /*
