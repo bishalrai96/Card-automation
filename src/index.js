@@ -81,7 +81,7 @@ try {
             }
             
         } else {
-            return "Ignoring because provided label does not match"
+            console.log("Ignoring because provided label does not match");
         }
     }
     run()
