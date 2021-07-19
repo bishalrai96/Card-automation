@@ -74,7 +74,8 @@ try {
             var columnsID = {}
             
             for (const val of test) {
-                columns = val.project.columns;
+                columns = val.project.columns.nodes;
+          
                 //var columns = test.project.columns;
                 //console.log("test.project.columns", test.project.columns);
                 
