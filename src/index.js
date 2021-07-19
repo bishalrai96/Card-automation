@@ -97,9 +97,9 @@ try {
                 }`
                 Queries.push(mutate_query);
             });
-            console.log("Mutation", Queries);
             for (const temp of Queries) {
-                await Promise.all(temp);
+                console.log(temp.join('\n'));
+                await Promise.all(temp.join('\n'));
             }
             // now push the card based on label
             
