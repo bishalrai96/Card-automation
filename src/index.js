@@ -48,7 +48,8 @@ try {
                         name
                         columns(first: 100) {
               	            nodes {
-                                name
+                                name,
+                                id
                             }
                         }
                       }
