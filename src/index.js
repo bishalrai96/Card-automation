@@ -65,7 +65,7 @@ try {
                 projects.push(val.project.name);
             }
             
-            columnsID = {}
+            var columnsID = {}
             
             for (const val of test) {
                 columnsID[val.column.id] = val.id;
