@@ -9,7 +9,7 @@ try {
         const octokit = github.getOctokit(token);
         const { eventName, payload } = github.context;
 
-        var labelIsPresent = true;
+        var labelIsPresent = false;
 
         if (payload.label.name == label) {
             labelIsPresent = true;
