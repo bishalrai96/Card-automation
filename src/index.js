@@ -5,7 +5,7 @@ try {
     async function run() {
         const token = core.getInput('repo-token');
         const project = core.getInput('project');
-        const columnName = core.getInput('column');
+        const columnName = "Second";//core.getInput('column');
         const label = core.getInput('label');
         const octokit = github.getOctokit(token);
         // console.log("the github context ", github.context)
@@ -80,6 +80,7 @@ try {
                 //console.log("test.project.columns", test.project.columns);
                 
                 for (const col of columns) {
+                    console.log(col.name);
                     if (columnName === col.name) {
                         columnsID[val.id] = col.name;
                     }
