@@ -92,7 +92,7 @@ try {
             var Queries = []
 
             Object.keys(columnsID).forEach(function (key) {
-                moveCard(octokit, columnsID[key], key);
+                await moveCard(octokit, columnsID[key], key);
             });
             // now push the card based on label
             
