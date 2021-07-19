@@ -5,7 +5,7 @@ try {
     async function run() {
         const token = core.getInput('repo-token');
         const project = core.getInput('project');
-        const column = core.getInput('column');
+        const columnName = core.getInput('column');
         const label = core.getInput('label');
         const octokit = github.getOctokit(token);
         // console.log("the github context ", github.context)
@@ -44,14 +44,24 @@ try {
                   projectCards {
                     nodes {
                       project {
+                        id,
                         name
                       }
+                      column {
+                        id,
+                        name
                     }
                   }
                 }
               }
             }`;
+
+            
+
+            // get all the columns from the issue's project
             console.log("query", get_which_projects_it_is_in_currently);
+
+            columnsId = {}
 
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
             var test = resource.projectCards.nodes;
@@ -59,8 +69,32 @@ try {
             for (const val of test) {
                 projects.push(val.project.name);
             }
+
+            for (const val of test) {
+                columnsID[val.column.id] = val.id;
+            }
+
+            console.log("test", columnsID);
+
+
             console.log("list of projects", projects)
-            
+            Queries = []
+            for (const val of columns) {
+                mutate_query = `mutation {
+                  moveProjectCard(input: {
+                    cardId: 
+
+                    })
+
+
+                    {
+    
+                  }
+                }`
+            }
+
+            // now push the card based on label
+
         } else {
             return "Ignoring because provided label does not match"
         }
