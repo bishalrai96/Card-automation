@@ -25,7 +25,8 @@ try {
         url = payload.issue.html_url;
 
         if (labelIsPresent) {
-            console.log("before");
+            console.log(labelIsPresent);
+            console.log(label);
             get_which_projects_it_is_in_currently = `query { 
               resource(url:"${url}") {
                 ... on Issue {
