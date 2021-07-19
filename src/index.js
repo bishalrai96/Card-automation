@@ -93,15 +93,14 @@ try {
                   moveProjectCard(input: {
                     cardId: "${key}"
                     columnId: "${columnsID[key]}"
-                    })
-                    {
-    
-                  }
+                    }) {clientMutationId}
                 }`
                 Queries.push(mutate_query);
             });
             console.log("Mutation", Queries);
-
+            for (const temp of Queries) {
+                await Promise.all(temp);
+            }
             // now push the card based on label
             
         } else {
