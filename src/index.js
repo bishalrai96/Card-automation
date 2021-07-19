@@ -4,16 +4,12 @@ const github = require('@actions/github');
 try {
     async function run() {
         const token = core.getInput('repo-token');
-        const project = core.getInput('project');
-        const columnName = "Ready";//core.getInput('column');
+        const columnName = core.getInput('column');
         const label = core.getInput('label');
         const octokit = github.getOctokit(token);
-        // console.log("the github context ", github.context)
-        // get url
         const { eventName, payload } = github.context;
 
         var labelIsPresent = true;
-
 
         payload.issue.labels.forEach(item => {
             if (item.name === label) {
@@ -21,20 +17,12 @@ try {
             }
         })
 
-
-
-        //console.log("eventName", eventName);
-        //console.log("payload", payload);
-        //console.log(typeof github.context);
-
         if (eventName !== "issues") {
-            throw new Error("Only issues event accepting ath the moment");
+            throw new Error("Only issues event accepting at the moment");
         }
 
         // get required information for graphql query
         url = payload.issue.html_url;
-        nodeId = payload.issue.node_id;
-
 
         if (labelIsPresent) {
             console.log("before");
@@ -61,15 +49,13 @@ try {
                 }
               }
             }`;
-            console.log("query", get_which_projects_it_is_in_currently);
-
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
             
-            var test = resource.projectCards.nodes;
+            var projectCards = resource.projectCards.nodes;
 
             var projects = []
-            for (const val of test) {
-                projects.push(val.project.name);
+            for (const projectCard of projectCards) {
+                projects.push(projectCard.project.name);
             }
             
             var columnsID = {}
@@ -97,10 +83,10 @@ try {
                 }`
                 Queries.push(mutate_query);
             });
+
             for (const temp of Queries) {
                 await octokit.graphql(temp);
             }
-            // now push the card based on label
             
         } else {
             return "Ignoring because provided label does not match"
@@ -111,11 +97,4 @@ try {
 } catch (error) {
     console.log("failed but why ", error.message)
     core.setFailed(error.message)
-}
-
-async function moveCard(octokit, cardID, columnID) {
-    await octokit.projects.moveCard({
-        card_id: cardID,
-        column_id: columnID
-    })
 }
