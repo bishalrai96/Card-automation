@@ -46,6 +46,11 @@ try {
                       id
                       project {
                         name
+                        columns(first: 100) {
+              	            nodes {
+                                name
+                            }
+                        }
                       }
                       column {
                         id
@@ -66,9 +71,14 @@ try {
             }
             
             var columnsID = {}
-            
+
             for (const val of test) {
-                columnsID[val.column.id] = val.id;
+                var columns = test.project.columns.nodes;
+                for (const col of columns) {
+                    if (columnName === col.name) {
+                        columnsID[val.id] = col.name;
+                    }
+                }
             }
 
             console.log("test", columnsID);
@@ -76,14 +86,12 @@ try {
 
             console.log("list of projects", projects)
             Queries = []
-            for (const val of columnsId) {
+            for (const val of columnsID) {
                 mutate_query = `mutation {
                   moveProjectCard(input: {
                     cardId: 
-
+                    
                     })
-
-
                     {
     
                   }
