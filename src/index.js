@@ -65,23 +65,26 @@ try {
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
             
             var test = resource.projectCards.nodes;
-            console.log("all", test.project.columns);
+
             var projects = []
             for (const val of test) {
                 projects.push(val.project.name);
             }
             
             var columnsID = {}
-            /*
+            
             for (const val of test) {
                 var columns = test.project.columns;
+                console.log(columns);
+                /*
                 for (const col of columns) {
                     if (columnName === col.name) {
                         columnsID[val.id] = col.name;
                     }
                 }
+                */
             }
-            */
+            
 
             console.log("test", columnsID);
             
