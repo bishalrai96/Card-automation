@@ -98,8 +98,7 @@ try {
                 Queries.push(mutate_query);
             });
             for (const temp of Queries) {
-                console.log(temp.join('\n'));
-                await Promise.all(temp.join('\n'));
+                await octokit.graphql(temp);
             }
             // now push the card based on label
             
