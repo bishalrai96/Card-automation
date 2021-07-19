@@ -68,7 +68,11 @@ try {
             columnsId = {}
             
             for (const val of test) {
-                columnsID[val.column.id] = val.id;
+                console.log("val.column.id",val.column.id);
+                console.log("val.column.id",val.id);
+                console.log("\n");
+           
+                //columnsID[val.column.id] = val.id;
             }
 
             console.log("test", columnsID);
