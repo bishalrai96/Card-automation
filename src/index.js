@@ -69,13 +69,13 @@ try {
             for (const val of test) {
                 projects.push(val.project.name);
             }
-
+/*
             for (const val of test) {
                 columnsID[val.column.id] = val.id;
             }
 
             console.log("test", columnsID);
-            /*
+            
 
             console.log("list of projects", projects)
             Queries = []
