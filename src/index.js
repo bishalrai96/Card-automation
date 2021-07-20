@@ -85,7 +85,7 @@ try {
                     }
                 }`
 
-            var allLabels = await octokit.graphql(labelsQuery).labels.nodes;
+            var allLabels = await octokit.graphql(labelsQuery);
 
             console.log("---allLabels ", allLabels);
 
