@@ -61,7 +61,7 @@ try {
                   }
                 }
               }
-                Labels: resource(url: "https://github.com/bishalrai96/Card-automation") {
+                labels: resource(url: "https://github.com/bishalrai96/Card-automation") {
                     ... on Repository {
                             labels(first: 10) {
                             nodes {
@@ -74,8 +74,14 @@ try {
             }`;
 
             getLabelInfo = ``
-            const {issue} = await octokit.graphql(get_which_projects_it_is_in_currently); 
-            
+            const { issue, labels } = await octokit.graphql(get_which_projects_it_is_in_currently); 
+            var LabelIDPair = {}
+
+            labels.labels.nodes.forEach(function (item) {
+                LabelIDPair[item.name] = item.id; 
+            })
+
+            console.log("Label ID Pair", LabelIDPair);
             var projectCards = issue.projectCards.nodes;
             var columnsID = {}
             
