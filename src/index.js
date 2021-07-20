@@ -89,7 +89,7 @@ try {
 
             console.log("---allLabels ", allLabels);
 
-            allLabels.labels.nodes.forEach(function (item) {
+            allLabels.resource.labels.nodes.forEach(function (item) {
                 LabelIDPair[item.name] = item.id;
             })
 
