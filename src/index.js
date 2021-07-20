@@ -75,12 +75,12 @@ try {
             }`;
 
             
-            const { issue, labels } = await octokit.graphql(get_which_projects_it_is_in_currently);
-            console.log("---labels ",labels)
+            const { issue, allLabels } = await octokit.graphql(get_which_projects_it_is_in_currently);
+            console.log("---labels ",allLabels)
             console.log("---issue ", issue)
             var LabelIDPair = {}
             const labelID = issue.id;
-            labels.labels.nodes.forEach(function (item) {
+            allLabels.labels.nodes.forEach(function (item) {
                 LabelIDPair[item.name] = item.id; 
             })
 
