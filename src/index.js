@@ -72,7 +72,7 @@ try {
             console.log("---issue ", issue)
             var LabelIDPair = {}
             const labelID = issue.id;
-
+            console.log(labelID);
             //var repoUrl = issue.repository.url;
 
             var labelsQuery = `query {               
