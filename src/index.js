@@ -13,7 +13,6 @@ try {
 
         console.log(payload);
 
-        console.log("repo url", repoUrl);
 
         var labelIsPresent = false;
         console.log(removeLabels);
@@ -76,7 +75,7 @@ try {
 
             var repoUrl = issue.repository.url;
 
-            labelsQuery = `query {               
+            var labelsQuery = `query {               
                         resource(url: "${repoUrl}") {
                         ... on Repository {
                                 labels(first: 10) {
