@@ -40,7 +40,7 @@ try {
             console.log(labelIsPresent);
             console.log(label);
             get_which_projects_it_is_in_currently = `query { 
-              issue: resource(url:"${url}") {
+              resource(url:"${url}") {
                 ... on Issue {
                   id
                   repository {
@@ -68,12 +68,12 @@ try {
             }`;
 
             
-            const issue = await octokit.graphql(get_which_projects_it_is_in_currently);
-            console.log("---issue ", issue)
+            const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently);
+            console.log("---issue ", resource)
             var LabelIDPair = {}
-            const labelID = issue.id;
+            const labelID = resource.issue.id;
             console.log(labelID);
-            //var repoUrl = issue.repository.url;
+            var repoUrl = resource.issue.repository.url;
 
             var labelsQuery = `query {               
                         resource(url: "${repoUrl}") {
