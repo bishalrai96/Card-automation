@@ -11,9 +11,6 @@ try {
         const { eventName, payload } = github.context;
         removeLabels = core.getInput('remove-label');
 
-        console.log(payload);
-
-
         var labelIsPresent = false;
         console.log(removeLabels);
         if (payload.label.name == label) {
