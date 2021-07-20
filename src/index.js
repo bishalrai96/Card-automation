@@ -13,7 +13,6 @@ try {
 
         console.log(payload);
 
-        var repoUrl = payload.issue.repository_url;
         console.log("repo url", repoUrl);
 
         var labelIsPresent = false;
@@ -45,6 +44,9 @@ try {
               issue: resource(url:"${url}") {
                 ... on Issue {
                   id
+                  repository {
+                    url
+                  }
                   projectCards {
                     nodes {
                       id
@@ -64,26 +66,35 @@ try {
                   }
                 }
               }
-                allLabels: resource(url: "${repoUrl}") {
-                    ... on Repository {
-                            labels(first: 10) {
-                            nodes {
-                                name
-                                id
-                            }
-                        }
-                    }
-                }
             }`;
 
             
-            const { issue, allLabels } = await octokit.graphql(get_which_projects_it_is_in_currently);
-            console.log("---labels ",allLabels)
+            const issue = await octokit.graphql(get_which_projects_it_is_in_currently);
             console.log("---issue ", issue)
             var LabelIDPair = {}
             const labelID = issue.id;
+
+            var repoUrl = issue.repository.url;
+
+            labelsQuery = `query {               
+                        resource(url: "${repoUrl}") {
+                        ... on Repository {
+                                labels(first: 10) {
+                                nodes {
+                                    name
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }`
+
+            var allLabels = await octokit.graphql(labelsQuery).labels.nodes;
+
+            console.log("---allLabels ", allLabels)''
+
             allLabels.labels.nodes.forEach(function (item) {
-                LabelIDPair[item.name] = item.id; 
+                LabelIDPair[item.name] = item.id;
             })
 
             var LabelsToRemove = []
