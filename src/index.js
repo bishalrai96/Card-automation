@@ -11,6 +11,8 @@ try {
         const { eventName, payload } = github.context;
         removeLabels = core.getInput('remove-label');
 
+        console.log(payload);
+
         var repoUrl = payload.issue.repository_url;
         console.log("repo url", repoUrl);
 
