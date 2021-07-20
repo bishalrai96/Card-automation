@@ -85,11 +85,11 @@ try {
                     }
                 }`
 
-            var allLabels = await octokit.graphql(labelsQuery).labels.nodes;
+            var allLabels = await octokit.graphql(labelsQuery);
 
             console.log("---allLabels ", allLabels);
 
-            allLabels.labels.nodes.forEach(function (item) {
+            allLabels.resource.labels.nodes.forEach(function (item) {
                 LabelIDPair[item.name] = item.id;
             })
 
