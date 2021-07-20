@@ -75,7 +75,7 @@ try {
             var labelsQuery = `query {               
                         resource(url: "${repoUrl}") {
                         ... on Repository {
-                                labels(first: 10) {
+                                labels(first: 100) {
                                 nodes {
                                     name
                                     id
