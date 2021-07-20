@@ -62,7 +62,7 @@ try {
                   }
                 }
               }
-                labels: resource(url: "https://github.com/bishalrai96/Card-automation") {
+                allLabels: resource(url: "https://github.com/bishalrai96/Card-automation") {
                     ... on Repository {
                             labels(first: 10) {
                             nodes {
