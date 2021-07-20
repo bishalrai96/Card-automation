@@ -11,11 +11,16 @@ try {
         const { eventName, payload } = github.context;
         removeLabels = core.getInput('remove-label');
 
+        var repoUrl = payload.repo_url;
+        console.log("repo url", repoUrl);
+
         var labelIsPresent = false;
         console.log(removeLabels);
         if (payload.label.name == label) {
             labelIsPresent = true;
         }
+
+
         /*
         payload.issue.labels.forEach(item => {
             if (item.name === label) {
@@ -87,6 +92,13 @@ try {
             for (const temp of Queries) {
                 await octokit.graphql(temp);
             }
+
+            removeLabel = `mutation {
+                __typename
+                removeLabelsFromLabelable(input: { labelableId: "MDU6SXNzdWU5NDU3NjM3MTc=", labelIds: "MDU6TGFiZWwzMTgzMDA2MTA1" }) {
+                    clientMutationId
+                }
+            }`
             
         } else {
             console.log("Ignoring because provided label does not match");
