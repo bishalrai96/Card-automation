@@ -139,6 +139,7 @@ try {
                             clientMutationId
                         }
                     }`
+                    await octokit.graphql(removeLabel);
                     console.log("label removed " + label);
                 }
             }
