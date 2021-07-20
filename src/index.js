@@ -91,7 +91,7 @@ try {
 
             var allLabels = await octokit.graphql(labelsQuery).labels.nodes;
 
-            console.log("---allLabels ", allLabels)''
+            console.log("---allLabels ", allLabels);
 
             allLabels.labels.nodes.forEach(function (item) {
                 LabelIDPair[item.name] = item.id;
