@@ -96,7 +96,7 @@ try {
             var LabelsToRemove = []
 
             console.log("Label ID Pair", LabelIDPair);
-            var projectCards = issue.projectCards.nodes;
+            var projectCards = resource.projectCards.nodes;
             var columnsID = {}
             
             for (const projectCard of projectCards) {
