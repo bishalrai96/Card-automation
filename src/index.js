@@ -73,7 +73,7 @@ try {
             var LabelIDPair = {}
             const labelID = issue.id;
 
-            var repoUrl = issue.repository.url;
+            //var repoUrl = issue.repository.url;
 
             var labelsQuery = `query {               
                         resource(url: "${repoUrl}") {
