@@ -68,9 +68,9 @@ try {
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently);
             console.log("---issue ", resource)
             var LabelIDPair = {}
-            const labelID = resource.issue.id;
+            const labelID = resource.id;
             console.log(labelID);
-            var repoUrl = resource.issue.repository.url;
+            var repoUrl = resource.repository.url;
 
             var labelsQuery = `query {               
                         resource(url: "${repoUrl}") {
