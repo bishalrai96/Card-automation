@@ -40,7 +40,28 @@ try {
             console.log(labelIsPresent);
             console.log(label);
             get_which_projects_it_is_in_currently = `query { 
-   
+              issue: resource(url:"https://github.com/bishalrai96/Card-automation") {
+                ... on Issue {
+                  id
+                  projectCards {
+                    nodes {
+                      id
+                      project {
+                        name
+                        columns(first: 100) {
+              	            nodes {
+                                name,
+                                id
+                            }
+                        }
+                      }
+                      column {
+                        id
+                      }
+                    }
+                  }
+                }
+              }
                 labels: resource(url: "${repoUrl}") {
                     ... on Repository {
                             labels(first: 10) {
