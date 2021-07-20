@@ -40,7 +40,7 @@ try {
             console.log(labelIsPresent);
             console.log(label);
             get_which_projects_it_is_in_currently = `query { 
-              resource(url:"${url}") {
+              issue: resource(url:"${url}") {
                 ... on Issue {
                   projectCards {
                     nodes {
@@ -60,11 +60,23 @@ try {
                     }
                   }
                 }
+                labels: resource(url: "https://github.com/bishalrai96/Card-automation") {
+                    ... on Repository {
+                      labels(first: 10) {
+                        nodes {
+                          name
+                          id
+                        }
+                      }
+                    }
+                  }
               }
             }`;
-            const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently); 
+
+            getLabelInfo = ``
+            const {issue} = await octokit.graphql(get_which_projects_it_is_in_currently); 
             
-            var projectCards = resource.projectCards.nodes;
+            var projectCards = issue.projectCards.nodes;
             var columnsID = {}
             
             for (const projectCard of projectCards) {
