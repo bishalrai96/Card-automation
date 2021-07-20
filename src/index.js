@@ -6,7 +6,7 @@ try {
         var removeLabels = ""
         const token = core.getInput('repo-token');
         const columnName = core.getInput('column');
-        const label = core.getInput('label').split(",").map(label => label.trim());
+        const labels = core.getInput('label').split(",").map(label => label.trim());
         const octokit = github.getOctokit(token);
         const { eventName, payload } = github.context;
         removeLabels = core.getInput('remove-label');
@@ -130,7 +130,7 @@ try {
                 await octokit.graphql(temp);
             }
 
-            for (const label of Labels) {
+            for (const label of labels) {
                 if (LabelIDPair[label] === undefined) {
                     console.log(label + " is not available");
                 } else {
