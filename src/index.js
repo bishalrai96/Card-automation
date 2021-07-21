@@ -131,6 +131,6 @@ async function mutationQueryRemoveLabels(octokit, columnsID) {
                     columnId: "${columnsID[key]}"
                     }) {clientMutationId}
                 }`
-        await octokit.graphql(temp);
+        await octokit.graphql(mutate_query);
     });
 }
