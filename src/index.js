@@ -85,6 +85,7 @@ try {
             var LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
 
             for (const label of removeLabels) {
+                console.log("inside ----", LabelIDToNamePair);
                 if (LabelIDToNamePair[label] === undefined) {
                     console.log(label + " is not available");
                 } else {
