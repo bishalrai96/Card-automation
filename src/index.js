@@ -124,7 +124,7 @@ try {
 }
 
 async function mutationQueryRemoveLabels(octokit, columnsID) {
-    Object.keys(columnsID).forEach(function (key) {
+    Object.keys(columnsID).forEach(async function (key) {
         mutate_query = `mutation {
                   moveProjectCard(input: {
                     cardId: "${key}"
