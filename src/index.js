@@ -78,11 +78,9 @@ try {
             }
 
 
-            Object.keys(columnsID).forEach(function (key) {
+            Object.keys(cardIdToColIdMap).forEach(function (key) {
                 mutationQueryMoveCard(octokit, key, columnsID[key]);
             });
-
-            mutationQueryMoveCard(octokit, cardIdToColIdMap);
 
             LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
 
@@ -137,6 +135,7 @@ async function getLabelNameToIDMap(octokit, repoUrl){
     allLabels.resource.labels.nodes.forEach(function (item) {
         LabelIDMap[item.name] = item.id;
     })
+    return LabelIDMap;
 }
 
 async function removeLabel(octokit, labeleID, labelID) {
