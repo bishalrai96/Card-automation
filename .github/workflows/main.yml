@@ -12,12 +12,14 @@ jobs:
       - name: Checkout
         uses: bishalrai96/Project_Card_Automation@master
       - name: Move to Ready
+        uses: ./
         id: hello
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "ready"
           column: "Ready"
       - name: Move to In Progress
+        uses: ./
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "in progress"
@@ -25,6 +27,7 @@ jobs:
           remove-label: "test, review, ready"
        
       - name: Move to Unique
+        uses: ./
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "unique"
@@ -32,6 +35,7 @@ jobs:
           remove-label: "ready, in progress"
           
       - name: Move to Review
+        uses: ./
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "review"
@@ -39,12 +43,14 @@ jobs:
           remove-label: "ready, in progress"
           
       - name: Move to Refl
+        uses: ./
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "refl"
           column: "Refl"
       
       - name: Move to First
+        uses: ./
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "good first issue"
