@@ -82,7 +82,7 @@ try {
                 mutationQueryMoveCard(octokit, key, cardIdToColIdMap[key]);
             });
 
-            LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
+            var LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
 
             for (const label of removeLabels) {
                 if (LabelIDToNamePair[label] === undefined) {
