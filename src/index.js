@@ -83,7 +83,7 @@ try {
 
             for (const label of removeLabels) {
                 if (LabelIDToNamePair[label] === undefined) {
-                    console.log(label + " is not available");
+                    console.log("label " + label + " is not on the issue");
                 } else {
                     removeLabel(octokit, labeleID, LabelIDToNamePair[label]);
                     console.log("label removed " + label);
