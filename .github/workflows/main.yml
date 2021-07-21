@@ -24,7 +24,7 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "in progress"
           column: "In Progress"
-          remove-label: "test, in progress"
+          remove-label: "test, review, ready"
        
       - name: Move to Unique
         uses: ./
