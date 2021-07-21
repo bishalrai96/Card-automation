@@ -123,7 +123,7 @@ try {
     core.setFailed(error.message)
 }
 
-function mutationQueryRemoveLabels(octokit, columnsID) {
+async function mutationQueryRemoveLabels(octokit, columnsID) {
     Object.keys(columnsID).forEach(function (key) {
         mutate_query = `mutation {
                   moveProjectCard(input: {
