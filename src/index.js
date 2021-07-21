@@ -82,7 +82,7 @@ try {
                 mutationQueryMoveCard(octokit, key, cardIdToColIdMap[key]);
             });
 
-            var LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
+            var LabelIDToNamePair = await getLabelNameToIDMap(octokit, repoUrl);
 
             for (const label of removeLabels) {
                 console.log("inside ----", LabelIDToNamePair);
