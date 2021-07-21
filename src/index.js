@@ -54,9 +54,6 @@ try {
             const labeleID = resource.id;
             var repoUrl = resource.repository.url;
             
-
-
-            console.log("Label ID Pair", LabelIDToNamePair);
             var projectCards = resource.projectCards.nodes;
             // stores mapped info of which card needs to moved to which column
             var cardIdToColIdMap = {}
@@ -85,11 +82,11 @@ try {
             var LabelIDToNamePair = await getLabelNameToIDMap(octokit, repoUrl);
 
             for (const label of removeLabels) {
-                console.log("inside ----", LabelIDToNamePair);
                 if (LabelIDToNamePair[label] === undefined) {
                     console.log(label + " is not available");
                 } else {
                     removeLabel(octokit, labeleID, LabelIDToNamePair[label]);
+                    console.log("label removed " + label);
                 }
             }
 
@@ -112,7 +109,6 @@ async function mutationQueryMoveCard(octokit, cardId, columnId) {
                     columnId: "${columnId}"
                     }) {clientMutationId}
                 }`
-    console.log("mutate ", mutate_query);
     await octokit.graphql(mutate_query);
 }
 
@@ -136,8 +132,6 @@ async function getLabelNameToIDMap(octokit, repoUrl){
     allLabels.resource.labels.nodes.forEach(function (item) {
         LabelIDMap[item.name] = item.id;
     })
-    console.log(repoUrl)
-    console.log(LabelIDMap);
     return LabelIDMap;
 }
 
@@ -148,5 +142,4 @@ async function removeLabel(octokit, labeleID, labelID) {
                         }
                     }`
     await octokit.graphql(removeLabel);
-    console.log("label removed " + label);
 }
