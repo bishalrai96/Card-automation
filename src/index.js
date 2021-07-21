@@ -135,6 +135,8 @@ async function getLabelNameToIDMap(octokit, repoUrl){
     allLabels.resource.labels.nodes.forEach(function (item) {
         LabelIDMap[item.name] = item.id;
     })
+    console.log(repoUrl)
+    console.log(LabelIDMap);
     return LabelIDMap;
 }
 
