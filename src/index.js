@@ -11,21 +11,6 @@ try {
         const { eventName, payload } = github.context;
         removeLabels = core.getInput('remove-label').split(",").map(label => label.trim());
 
-        var labelIsPresent = false;
-        console.log(removeLabels);
-        if (payload.label.name == label) {
-            labelIsPresent = true;
-        }
-
-
-        /*
-        payload.issue.labels.forEach(item => {
-            if (item.name === label) {
-                labelIsPresent = true;
-            }
-        })
-        */
-
         if (eventName !== "issues") {
             throw new Error("Only issues event accepting at the moment");
         }
@@ -33,7 +18,7 @@ try {
         // get required information for graphql query
         url = payload.issue.html_url;
 
-        if (labelIsPresent) {
+        if (payload.label.name == label) {
             console.log(labelIsPresent);
             console.log(label);
             get_which_projects_it_is_in_currently = `query { 
@@ -66,10 +51,8 @@ try {
 
             
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently);
-            console.log("---issue ", resource)
             var LabelIDPair = {}
             const labelID = resource.id;
-            console.log(labelID);
             var repoUrl = resource.repository.url;
 
             var labelsQuery = `query {               
@@ -87,13 +70,11 @@ try {
 
             var allLabels = await octokit.graphql(labelsQuery);
 
-            console.log("---allLabels ", allLabels);
 
             allLabels.resource.labels.nodes.forEach(function (item) {
                 LabelIDPair[item.name] = item.id;
             })
 
-            var LabelsToRemove = []
 
             console.log("Label ID Pair", LabelIDPair);
             var projectCards = resource.projectCards.nodes;
@@ -113,22 +94,8 @@ try {
                 return 
             }
 
-           
-            var Queries = []
+            mutationQueryRemoveLabels(octokit, columnsID);
 
-            Object.keys(columnsID).forEach(function (key) {
-                mutate_query = `mutation {
-                  moveProjectCard(input: {
-                    cardId: "${key}"
-                    columnId: "${columnsID[key]}"
-                    }) {clientMutationId}
-                }`
-                Queries.push(mutate_query);
-            });
-
-            for (const temp of Queries) {
-                await octokit.graphql(temp);
-            }
 
             for (const label of removeLabels) {
                 if (LabelIDPair[label] === undefined) {
@@ -154,4 +121,16 @@ try {
 } catch (error) {
     console.log("failed but why ", error.message)
     core.setFailed(error.message)
+}
+
+function mutationQueryRemoveLabels(octokit, columnsID) {
+    Object.keys(columnsID).forEach(function (key) {
+        mutate_query = `mutation {
+                  moveProjectCard(input: {
+                    cardId: "${key}"
+                    columnId: "${columnsID[key]}"
+                    }) {clientMutationId}
+                }`
+        await octokit.graphql(temp);
+    });
 }
