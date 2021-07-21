@@ -24,7 +24,7 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           label: "in progress"
           column: "In Progress"
-          remove-label: "test"
+          remove-label: "test, in progress"
        
       - name: Move to Unique
         uses: ./
@@ -33,5 +33,28 @@ jobs:
           label: "unique"
           column: "Unique"
           remove-label: "ready, in progress"
-       
+          
+      - name: Move to Review
+        uses: ./
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          label: "review"
+          column: "Review"
+          remove-label: "ready, in progress"
+          
+      - name: Move to Refl
+        uses: ./
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          label: "refl"
+          column: "Refl"
+      
+      
+      - name: Move to First
+        uses: ./
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          label: "good first issue"
+          column: "First"
+          remove-label: "ready, in progress, review"
        
