@@ -123,7 +123,7 @@ try {
     core.setFailed(error.message)
 }
 
-async function mutationQueryRemoveLabels(octokit, columnsID) {
+function mutationQueryRemoveLabels(octokit, columnsID) {
     Object.keys(columnsID).forEach(async function (key) {
         mutate_query = `mutation {
                   moveProjectCard(input: {
@@ -131,6 +131,7 @@ async function mutationQueryRemoveLabels(octokit, columnsID) {
                     columnId: "${columnsID[key]}"
                     }) {clientMutationId}
                 }`
+        console.log("mutate ", mutate_query);
         await octokit.graphql(mutate_query);
     });
 }
