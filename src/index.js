@@ -49,63 +49,48 @@ try {
 
             
             const {resource} = await octokit.graphql(get_which_projects_it_is_in_currently);
-            var LabelIDPair = {}
-            const labelID = resource.id;
+            var LabelIDToNamePair = {}
+            // Id of labele, AKA id of issue
+            const labeleID = resource.id;
             var repoUrl = resource.repository.url;
-
-            var labelsQuery = `query {               
-                        resource(url: "${repoUrl}") {
-                        ... on Repository {
-                                labels(first: 100) {
-                                nodes {
-                                    name
-                                    id
-                                }
-                            }
-                        }
-                    }
-                }`
-
-            var allLabels = await octokit.graphql(labelsQuery);
-
-
-            allLabels.resource.labels.nodes.forEach(function (item) {
-                LabelIDPair[item.name] = item.id;
-            })
-
-
-            console.log("Label ID Pair", LabelIDPair);
-            var projectCards = resource.projectCards.nodes;
-            var columnsID = {}
             
+
+
+            console.log("Label ID Pair", LabelIDToNamePair);
+            var projectCards = resource.projectCards.nodes;
+            // stores mapped info of which card needs to moved to which column
+            var cardIdToColIdMap = {}
+
+            // Go through each project card
             for (const projectCard of projectCards) {
                 columns = projectCard.project.columns.nodes;
                 for (const col of columns) {
+                    // check if a project card's assigned project has a destination column
                     if (columnName === col.name) {
-                        columnsID[projectCard.id] = col.id;
+                        cardIdToColIdMap[projectCard.id] = col.id;
                     }
                 }
             }
 
-            if (Object.keys(columnsID).length == 0) {
+            if (Object.keys(cardIdToColIdMap).length == 0) {
                 console.log(columnName + " does not match with any columns in the assigned project");
                 return 
             }
 
-            mutationQueryRemoveLabels(octokit, columnsID);
 
+            Object.keys(columnsID).forEach(function (key) {
+                mutationQueryMoveCard(octokit, key, columnsID[key]);
+            });
+
+            mutationQueryMoveCard(octokit, cardIdToColIdMap);
+
+            LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
 
             for (const label of removeLabels) {
-                if (LabelIDPair[label] === undefined) {
+                if (LabelIDToNamePair[label] === undefined) {
                     console.log(label + " is not available");
                 } else {
-                    removeLabel = `mutation {
-                        removeLabelsFromLabelable(input: { labelableId: "${labelID}", labelIds: "${LabelIDPair[label]}" }) {
-                            clientMutationId
-                        }
-                    }`
-                    await octokit.graphql(removeLabel);
-                    console.log("label removed " + label);
+                    removeLabel(octokit, labeleID, LabelIDToNamePair[label]);
                 }
             }
 
@@ -121,15 +106,45 @@ try {
     core.setFailed(error.message)
 }
 
-function mutationQueryRemoveLabels(octokit, columnsID) {
-    Object.keys(columnsID).forEach(async function (key) {
-        mutate_query = `mutation {
+async function mutationQueryMoveCard(octokit, cardId, columnId) {
+    mutate_query = `mutation {
                   moveProjectCard(input: {
-                    cardId: "${key}"
-                    columnId: "${columnsID[key]}"
+                    cardId: "${cardId}"
+                    columnId: "${columnId}"
                     }) {clientMutationId}
                 }`
-        console.log("mutate ", mutate_query);
-        await octokit.graphql(mutate_query);
-    });
+    console.log("mutate ", mutate_query);
+    await octokit.graphql(mutate_query);
+}
+
+
+async function getLabelNameToIDMap(octokit, repoUrl){
+    var LabelIDMap = {}
+    var labelsQuery = `query {               
+                        resource(url: "${repoUrl}") {
+                        ... on Repository {
+                                labels(first: 100) {
+                                nodes {
+                                    name
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }`
+
+    var allLabels = await octokit.graphql(labelsQuery);
+    allLabels.resource.labels.nodes.forEach(function (item) {
+        LabelIDMap[item.name] = item.id;
+    })
+}
+
+async function removeLabel(octokit, labeleID, labelID) {
+    var removeLabel = `mutation {
+                        removeLabelsFromLabelable(input: { labelableId: "${labeleID}", labelIds: "${labelID}" }) {
+                            clientMutationId
+                        }
+                    }`
+    await octokit.graphql(removeLabel);
+    console.log("label removed " + label);
 }
