@@ -79,7 +79,7 @@ try {
 
 
             Object.keys(cardIdToColIdMap).forEach(function (key) {
-                mutationQueryMoveCard(octokit, key, columnsID[key]);
+                mutationQueryMoveCard(octokit, key, cardIdToColIdMap[key]);
             });
 
             LabelIDToNamePair = getLabelNameToIDMap(octokit, repoUrl);
